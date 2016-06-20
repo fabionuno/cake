@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
@@ -9,7 +12,14 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.NUnit
 {
     /// <summary>
-    /// Contains functionality related to running NUnit unit tests.
+    /// <para>Contains functionality related to running <see href="https://github.com/nunit/nunit">NUnit</see> tests.</para>
+    /// <para>
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the <see cref="NUnitSettings" /> class:
+    /// <code>
+    /// #tool "nuget:?package=NUnit.Runners&amp;version=2.6.4"
+    /// </code>
+    /// </para>
     /// </summary>
     [CakeAliasCategory("NUnit")]
     public static class NUnitAliases
@@ -49,7 +59,7 @@ namespace Cake.Common.Tools.NUnit
         /// <example>
         /// <code>
         /// NUnit("./src/UnitTests/*.dll", new NUnitSettings {
-        ///     Timeout = 4000, 
+        ///     Timeout = 4000,
         ///     StopOnError = true
         ///     });
         /// </code>

@@ -1,11 +1,21 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Core;
 using Cake.Core.Annotations;
 
 namespace Cake.Common.Tools.OctopusDeploy
 {
     /// <summary>
-    /// Contains functionality for working with Octopus Deploy.
+    /// <para>Contains functionality related to <see href="https://octopus.com/">Octopus Deploy</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the appropriate settings class:
+    /// <code>
+    /// #tool "nuget:?package=OctopusTools"
+    /// </code>
+    /// </para>
     /// </summary>
     [CakeAliasCategory("Octopus Deploy")]
     public static class OctopusDeployAliases

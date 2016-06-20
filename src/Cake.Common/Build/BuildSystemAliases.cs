@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Common.Build.AppVeyor;
 using Cake.Common.Build.Bamboo;
 using Cake.Common.Build.Bitrise;
@@ -60,6 +63,8 @@ namespace Cake.Common.Build
         /// <param name="context">The context.</param>
         /// <returns>A <see cref="Cake.Common.Build.AppVeyor"/> instance.</returns>
         [CakePropertyAlias(Cache = true)]
+        [CakeNamespaceImport("Cake.Common.Build.AppVeyor")]
+        [CakeNamespaceImport("Cake.Common.Build.AppVeyor.Data")]
         public static IAppVeyorProvider AppVeyor(this ICakeContext context)
         {
             if (context == null)

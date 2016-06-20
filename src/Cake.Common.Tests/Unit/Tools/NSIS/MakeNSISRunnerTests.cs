@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System.Collections.Generic;
 using Cake.Common.Tests.Fixtures.Tools;
 using Cake.Core;
 using Cake.Testing;
@@ -158,7 +161,7 @@ namespace Cake.Common.Tests.Unit.Tools.NSIS
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("/DFoo=Bar /DTest /DTest2 /Working/Test.nsi", result.Args);
+                Assert.Equal("/DFoo=Bar /DTest /DTest2 \"/Working/Test.nsi\"", result.Args);
             }
 
             [Fact]
@@ -172,7 +175,7 @@ namespace Cake.Common.Tests.Unit.Tools.NSIS
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("/NOCD /Working/Test.nsi", result.Args);
+                Assert.Equal("/NOCD \"/Working/Test.nsi\"", result.Args);
             }
 
             [Fact]
@@ -186,7 +189,7 @@ namespace Cake.Common.Tests.Unit.Tools.NSIS
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("/NOCONFIG /Working/Test.nsi", result.Args);
+                Assert.Equal("/NOCONFIG \"/Working/Test.nsi\"", result.Args);
             }
         }
     }

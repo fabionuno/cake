@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
@@ -6,7 +9,11 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.MSBuild
 {
     /// <summary>
-    /// Contains functionality related to MSBuild.
+    /// <para>Contains functionality related to <see href="https://msdn.microsoft.com/en-us/library/dd393574.aspx">MSBuild</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, MSBuild will already have to be installed on the machine the Cake Script
+    /// is being executed.
+    /// </para>
     /// </summary>
     [CakeAliasCategory("MSBuild")]
     public static class MSBuildAliases

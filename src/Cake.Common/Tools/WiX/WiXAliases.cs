@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
@@ -9,7 +12,14 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.WiX
 {
     /// <summary>
-    /// Contains functionality related to running WiX tools.
+    /// <para>Contains functionality related to <see href="http://wixtoolset.org/">WiX</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the appropriate settings class:
+    /// <code>
+    /// #tool "nuget:?package=WiX.Toolset"
+    /// </code>
+    /// </para>
     /// </summary>
     [CakeAliasCategory("WiX")]
     public static class WiXAliases
@@ -23,7 +33,7 @@ namespace Cake.Common.Tools.WiX
         ///     Architecture = Architecture.X64,
         ///     Verbose = true
         ///     };
-        /// WiXCandle("./src/*.wxs", settings); 
+        /// WiXCandle("./src/*.wxs", settings);
         /// </code>
         /// </example>
         /// <param name="context">The context.</param>
@@ -58,7 +68,7 @@ namespace Cake.Common.Tools.WiX
         ///     Architecture = Architecture.X64,
         ///     Verbose = true
         ///     };
-        /// WiXCandle(files, settings); 
+        /// WiXCandle(files, settings);
         /// </code>
         /// </example>
         /// <param name="context">The context.</param>
@@ -85,7 +95,7 @@ namespace Cake.Common.Tools.WiX
         /// LightSettings settings = new LightSettings {
         ///     RawArguments = "-O1 -pedantic -v"
         ///     };
-        /// WiXLight("./src/*.wixobj", settings); 
+        /// WiXLight("./src/*.wixobj", settings);
         /// </code>
         /// </example>
         /// <param name="context">The context.</param>
@@ -119,7 +129,7 @@ namespace Cake.Common.Tools.WiX
         /// LightSettings settings = new LightSettings {
         ///     RawArguments = "-O1 -pedantic -v"
         ///     };
-        /// WiXLight(files, settings); 
+        /// WiXLight(files, settings);
         /// </code>
         /// </example>
         /// <param name="context">The context.</param>

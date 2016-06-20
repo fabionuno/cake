@@ -1,5 +1,9 @@
-﻿using System.IO;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System.IO;
 using Cake.Common.Tests.Fixtures;
+using Cake.Common.Xml;
 using Xunit;
 
 namespace Cake.Common.Tests.Unit.XML
@@ -47,7 +51,20 @@ namespace Cake.Common.Tests.Unit.XML
                 // Then
                 Assert.IsArgumentNullException(result, "xpath");
             }
-            
+
+            [Fact]
+            public void Should_Throw_If_File_Has_Dtd()
+            {
+                // Given
+                var fixture = new XmlPeekAliasesFixture(xmlWithDtd: true);
+
+                // When
+                var result = Record.Exception(() => fixture.Peek("CFBundleDisplayName"));
+
+                // Then
+                Assert.IsType<System.Xml.XmlException>(result);
+            }
+
             [Fact]
             public void Should_Get_Attribute_Value()
             {
@@ -72,6 +89,20 @@ namespace Cake.Common.Tests.Unit.XML
 
                 // Then
                 Assert.Equal("test value", result);
+            }
+
+            [Fact]
+            public void Should_Get_Node_Value_From_File_With_Dtd()
+            {
+                // Given
+                var fixture = new XmlPeekAliasesFixture(xmlWithDtd:true);
+                fixture.Settings.DtdProcessing = XmlDtdProcessing.Parse;
+
+                // When
+                var result = fixture.Peek("/plist/dict/key/text()");
+
+                // Then
+                Assert.Equal("CFBundleDisplayName", result);
             }
         }
     }

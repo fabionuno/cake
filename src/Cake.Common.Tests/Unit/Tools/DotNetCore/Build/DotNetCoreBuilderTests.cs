@@ -1,4 +1,7 @@
-﻿using Cake.Common.Tests.Fixtures.Tools.DotNetCore.Build;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using Cake.Common.Tests.Fixtures.Tools.DotNetCore.Build;
 using Cake.Common.Tools.DotNetCore.Build;
 using Cake.Testing;
 using Xunit;
@@ -89,7 +92,7 @@ namespace Cake.Common.Tests.Unit.Tools.DotNetCore.Build
             {
                 // Given
                 var fixture = new DotNetCoreBuilderFixture();
-                fixture.Settings.Frameworks = new[] { "net451", "dnxcore50" };
+                fixture.Settings.Framework = "net451";
                 fixture.Settings.Runtime = "runtime1";
                 fixture.Settings.Configuration = "Release";
                 fixture.Settings.VersionSuffix = "rc1";
@@ -99,7 +102,7 @@ namespace Cake.Common.Tests.Unit.Tools.DotNetCore.Build
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("build ./src/* --runtime runtime1 --framework \"net451;dnxcore50\" --configuration Release --version-suffix rc1", result.Args);
+                Assert.Equal("build ./src/* --runtime runtime1 --framework net451 --configuration Release --version-suffix rc1", result.Args);
             }
 
             [Fact]

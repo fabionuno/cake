@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Common.Tools.Chocolatey.ApiKey;
 using Cake.Common.Tools.Chocolatey.Config;
 using Cake.Common.Tools.Chocolatey.Features;
@@ -15,7 +18,12 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.Chocolatey
 {
     /// <summary>
-    /// Contains functionality for working with Chocolatey.
+    /// <para>Contains functionality for working with <see href="https://github.com/chocolatey/choco">Chocolatey</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, Chocolatey will require to be installed on the machine where the build script
+    /// is being run.  See this <see href="https://github.com/chocolatey/choco/wiki/Installation">page</see> for details on how
+    /// Chocolatey can be installed.
+    /// </para>
     /// </summary>
     [CakeAliasCategory("Chocolatey")]
     public static class ChocolateyAliases

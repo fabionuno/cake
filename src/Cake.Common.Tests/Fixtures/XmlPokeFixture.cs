@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Cake.Common.Tests.Properties;
@@ -17,7 +20,7 @@ namespace Cake.Common.Tests.Fixtures
        public FilePath XmlPath { get; set; }
        public XmlPokeSettings Settings { get; set; }
 
-       public XmlPokeFixture(bool xmlExists = true)
+       public XmlPokeFixture(bool xmlExists = true, bool xmlWithDtd = false)
        {
            Settings = new XmlPokeSettings();
 
@@ -27,7 +30,8 @@ namespace Cake.Common.Tests.Fixtures
 
            if (xmlExists)
            {
-               var xmlFile = fileSystem.CreateFile("/Working/web.config").SetContent(Resources.XmlPoke_Xml);
+               string content = xmlWithDtd ? Resources.XmlPoke_Xml_Dtd : Resources.XmlPoke_Xml;
+               var xmlFile = fileSystem.CreateFile("/Working/web.config").SetContent(content);
                XmlPath = xmlFile.Path;
            }
 
@@ -43,6 +47,11 @@ namespace Cake.Common.Tests.Fixtures
            XmlPokeAliases.XmlPoke(Context, XmlPath, xpath, value, Settings);
        }
 
+       public string PokeString(string xml, string xpath, string value)
+       {
+           return XmlPokeAliases.XmlPokeString(Context, xml, xpath, value, Settings);
+       }
+
         public bool TestIsValue(string xpath, string value)
         {
             var xmlString = new StreamReader(FileSystem.GetFile(XmlPath).OpenRead()).ReadToEnd();
@@ -52,7 +61,7 @@ namespace Cake.Common.Tests.Fixtures
         public bool TestIsValue(string xml, string xpath, string value)
         {
             using (var reader = new StringReader(xml))
-            using (var xmlReader = XmlReader.Create(reader))
+            using (var xmlReader = XmlReader.Create(reader, GetXmlReaderSettings(Settings)))
             {
 
                 var document = new XmlDocument();
@@ -78,7 +87,7 @@ namespace Cake.Common.Tests.Fixtures
         public bool TestIsRemoved(string xml, string xpath)
         {
             using (var reader = new StringReader(xml))
-            using (var xmlReader = XmlReader.Create(reader))
+            using (var xmlReader = XmlReader.Create(reader, GetXmlReaderSettings(Settings)))
             {
 
                 var document = new XmlDocument();
@@ -93,6 +102,19 @@ namespace Cake.Common.Tests.Fixtures
                 var nodes = document.SelectNodes(xpath, namespaceManager);
                 return nodes != null && nodes.Count == 0;
             }
+        }
+
+        /// <summary>
+        /// Gets a XmlReaderSettings from a XmlPokeSettings
+        /// </summary>
+        /// <returns>The xml reader settings.</returns>
+        /// <param name="settings">Additional settings to tweak Xml Poke behavior.</param>
+        private static XmlReaderSettings GetXmlReaderSettings(XmlPokeSettings settings)
+        {
+            var xmlReaderSettings = new XmlReaderSettings();
+            xmlReaderSettings.DtdProcessing = (DtdProcessing)settings.DtdProcessing;
+
+            return xmlReaderSettings;
         }
     }
 }

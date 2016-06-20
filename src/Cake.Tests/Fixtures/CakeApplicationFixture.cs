@@ -1,13 +1,14 @@
-﻿using Cake.Commands;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using Cake.Commands;
 using Cake.Core.Diagnostics;
-using Cake.Diagnostics;
 using NSubstitute;
 
 namespace Cake.Tests.Fixtures
 {
     internal sealed class CakeApplicationFixture
     {
-        public IVerbosityAwareLog Log { get; set; }
         public ICommandFactory CommandFactory { get; set; }
 
         public CakeOptions Options { get; set; }
@@ -17,13 +18,12 @@ namespace Cake.Tests.Fixtures
             Options = new CakeOptions();
             Options.Verbosity = Verbosity.Diagnostic;
 
-            Log = Substitute.For<IVerbosityAwareLog>();
             CommandFactory = Substitute.For<ICommandFactory>();
         }
 
         public CakeApplication CreateApplication()
         {
-            return new CakeApplication(Log, CommandFactory);
+            return new CakeApplication(CommandFactory);
         }
 
         public int RunApplication()

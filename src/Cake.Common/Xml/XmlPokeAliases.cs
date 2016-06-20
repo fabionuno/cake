@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
@@ -225,6 +228,11 @@ namespace Cake.Common.Xml
                 throw new ArgumentNullException("filePath");
             }
 
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             var file = context.FileSystem.GetFile(filePath);
             if (!file.Exists)
             {
@@ -234,7 +242,7 @@ namespace Cake.Common.Xml
             using (var memoryStream = new MemoryStream())
             {
                 using (var fileStream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
-                using (var xmlReader = XmlReader.Create(fileStream))
+                using (var xmlReader = XmlReader.Create(fileStream, GetXmlReaderSettings(settings)))
                 using (var xmlWriter = XmlWriter.Create(memoryStream))
                 {
                     XmlPoke(xmlReader, xmlWriter, xpath, value, settings);
@@ -246,44 +254,6 @@ namespace Cake.Common.Xml
                     memoryStream.CopyTo(fileStream);
                 }
             }
-        }
-
-        /// <summary>
-        /// Set the value of, or remove, target nodes.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="sourceXml">The source xml to transform.</param>
-        /// <param name="xpath">The xpath of the nodes to set.</param>
-        /// <param name="value">The value to set too. Leave blank to remove the selected nodes.</param>
-        /// <returns>Resulting XML.</returns>
-        /// <remarks>
-        /// The method is now obsolete replaced by <see cref="XmlPokeString(Cake.Core.ICakeContext,string,string,string)"/>
-        /// </remarks>
-        [CakeMethodAlias]
-        [Obsolete("Please use XmlPokeString(string, string, string) instead.", false)]
-        public static string XmlPoke(this ICakeContext context, string sourceXml, string xpath, string value)
-        {
-            return context.XmlPokeString(sourceXml, xpath, value, new XmlPokeSettings());
-        }
-
-        /// <summary>
-        /// Set the value of, or remove, target nodes.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="sourceXml">The source xml to transform.</param>
-        /// <param name="xpath">The xpath of the nodes to set.</param>
-        /// <param name="value">The value to set too. Leave blank to remove the selected nodes.</param>
-        /// <param name="settings">Additional settings to tweak Xml Poke behavior.</param>
-        /// <returns>Resulting XML.</returns>
-        /// <remarks>
-        /// The method is now obsolete replaced by <see cref="XmlPokeString(Cake.Core.ICakeContext,string,string,string,XmlPokeSettings)"/>
-        /// </remarks>
-        [CakeMethodAlias]
-        [Obsolete("Please use XmlPokeString(string, string, string, XmlPokeSettings) instead.", false)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-        public static string XmlPoke(this ICakeContext context, string sourceXml, string xpath, string value, XmlPokeSettings settings)
-        {
-            return context.XmlPokeString(sourceXml, xpath, value, settings);
         }
 
         /// <summary>
@@ -495,7 +465,7 @@ namespace Cake.Common.Xml
 
             using (var resultStream = new MemoryStream())
             using (var fileReader = new StringReader(sourceXml))
-            using (var xmlReader = XmlReader.Create(fileReader))
+            using (var xmlReader = XmlReader.Create(fileReader, GetXmlReaderSettings(settings)))
             using (var xmlWriter = XmlWriter.Create(resultStream))
             {
                 XmlPoke(xmlReader, xmlWriter, xpath, value, settings);
@@ -570,6 +540,19 @@ namespace Cake.Common.Xml
             }
 
             document.Save(destination);
+        }
+
+        /// <summary>
+        /// Gets a XmlReaderSettings from a XmlPokeSettings
+        /// </summary>
+        /// <returns>The xml reader settings.</returns>
+        /// <param name="settings">Additional settings to tweak Xml Poke behavior.</param>
+        private static XmlReaderSettings GetXmlReaderSettings(XmlPokeSettings settings)
+        {
+            var xmlReaderSettings = new XmlReaderSettings();
+            xmlReaderSettings.DtdProcessing = (DtdProcessing)settings.DtdProcessing;
+
+            return xmlReaderSettings;
         }
     }
 }

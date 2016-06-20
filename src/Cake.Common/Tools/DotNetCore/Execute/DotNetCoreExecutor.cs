@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -34,7 +37,7 @@ namespace Cake.Common.Tools.DotNetCore.Execute
         /// <param name="assemblyPath">The assembly path.</param>
         /// <param name="arguments">The arguments.</param>
         /// <param name="settings">The settings.</param>
-        public void Execute(FilePath assemblyPath, string arguments, DotNetCoreSettings settings)
+        public void Execute(FilePath assemblyPath, ProcessArgumentBuilder arguments, DotNetCoreSettings settings)
         {
             if (assemblyPath == null)
             {
@@ -44,20 +47,20 @@ namespace Cake.Common.Tools.DotNetCore.Execute
             {
                 throw new ArgumentNullException("settings");
             }
-            
+
             Run(settings, GetArguments(assemblyPath, arguments, settings));
         }
 
-        private ProcessArgumentBuilder GetArguments(FilePath assemblyPath, string arguments, DotNetCoreSettings settings)
+        private ProcessArgumentBuilder GetArguments(FilePath assemblyPath, ProcessArgumentBuilder arguments, DotNetCoreSettings settings)
         {
             var builder = CreateArgumentBuilder(settings);
 
             assemblyPath = assemblyPath.IsRelative ? assemblyPath.MakeAbsolute(_environment) : assemblyPath;
             builder.Append(assemblyPath.FullPath);
 
-            if (!string.IsNullOrEmpty(arguments))
+            if (!arguments.IsNullOrEmpty())
             {
-                builder.Append(arguments);
+                arguments.CopyTo(builder);
             }
 
             return builder;

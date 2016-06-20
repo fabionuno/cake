@@ -258,6 +258,26 @@ namespace Cake.Common.Tests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to using System.Reflection;
+        ///using System.Runtime.CompilerServices;
+        ///
+        ///// Information about this assembly is defined by the following attributes.
+        ///// Change them to the values specific to your project.
+        ///
+        ///[assembly: AssemblyTitle (&quot;MonoDevelopAssemblyTitle&quot;)]
+        ///[assembly: AssemblyDescription (&quot;MonoDevelopAssemblyDescription&quot;)]
+        ///[assembly: AssemblyConfiguration (&quot;MonoDevelopConfiguration&quot;)]
+        ///[assembly: AssemblyCompany (&quot;MonoDevelopCompany&quot;)]
+        ///[assembly: AssemblyProduct (&quot;MonoDevelopProduct&quot;)]
+        ///[assembly: Assembl [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MonoDevelopAssemblyInfo {
+            get {
+                return ResourceManager.GetString("MonoDevelopAssemblyInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;package xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;metadata xmlns=&quot;http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd&quot;&gt;
@@ -410,6 +430,26 @@ namespace Cake.Common.Tests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to using System.Reflection;
+        ///using System.Runtime.CompilerServices;
+        ///
+        ///// Information about this assembly is defined by the following attributes.
+        ///// Change them to the values specific to your project.
+        ///
+        ///[assembly: AssemblyTitle(&quot;VisualStudioAssemblyTitle&quot;)]
+        ///[assembly: AssemblyDescription(&quot;VisualStudioAssemblyDescription&quot;)]
+        ///[assembly: AssemblyConfiguration(&quot;VisualStudioConfiguration&quot;)]
+        ///[assembly: AssemblyCompany(&quot;VisualStudioCompany&quot;)]
+        ///[assembly: AssemblyProduct(&quot;VisualStudioProduct&quot;)]
+        ///[assembly: Assembl [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VisualStudioAssemblyInfo {
+            get {
+                return ResourceManager.GetString("VisualStudioAssemblyInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
         ///&lt;doc&gt;
         ///    &lt;assembly&gt;
@@ -448,6 +488,23 @@ namespace Cake.Common.Tests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+        ///&lt;plist version=&quot;1.0&quot;&gt;
+        ///&lt;dict&gt;
+        ///    &lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+        ///    &lt;string&gt;Cake&lt;/string&gt;
+        ///&lt;/dict&gt;
+        ///&lt;/plist&gt;
+        ///.
+        /// </summary>
+        internal static string XmlPeek_Xml_Dtd {
+            get {
+                return ResourceManager.GetString("XmlPeek_Xml_Dtd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;configuration&gt;
         ///    &lt;appSettings&gt;
@@ -459,6 +516,22 @@ namespace Cake.Common.Tests.Properties {
         internal static string XmlPoke_Xml {
             get {
                 return ResourceManager.GetString("XmlPoke_Xml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+        ///&lt;plist version=&quot;1.0&quot;&gt;
+        ///&lt;dict&gt;
+        ///    &lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+        ///    &lt;string&gt;Cake&lt;/string&gt;
+        ///&lt;/dict&gt;
+        ///&lt;/plist&gt;.
+        /// </summary>
+        internal static string XmlPoke_Xml_Dtd {
+            get {
+                return ResourceManager.GetString("XmlPoke_Xml_Dtd", resourceCulture);
             }
         }
         

@@ -1,6 +1,12 @@
-﻿using System.IO;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System.IO;
 using Cake.Common.Tests.Fixtures;
+using Cake.Common.Xml;
 using Xunit;
+using Cake.Common.Tests.Properties;
+using System.Text;
 
 namespace Cake.Common.Tests.Unit.XML
 {
@@ -47,6 +53,32 @@ namespace Cake.Common.Tests.Unit.XML
                 // Then
                 Assert.IsArgumentNullException(result, "xpath");
             }
+
+            [Fact]
+            public void Should_Throw_If_Xml_File_Has_Dtd()
+            {
+                // Given
+                var fixture = new XmlPokeFixture(xmlWithDtd: true);
+
+                // When
+                var result = Record.Exception(() => fixture.Poke("/plist/dict/string/text()",""));
+
+                // Then
+                Assert.IsType<System.Xml.XmlException>(result);
+            }
+
+            [Fact]
+            public void Should_Throw_If_Xml_String_Has_Dtd()
+            {
+                // Given
+                var fixture = new XmlPokeFixture(xmlExists:false);
+
+                // When
+                var result = Record.Exception(() => fixture.PokeString(Resources.XmlPoke_Xml_Dtd, "/plist/dict/string/text()",""));
+
+                // Then
+                Assert.IsType<System.Xml.XmlException>(result);
+            }
         }
 
         public sealed class Transform
@@ -61,9 +93,9 @@ namespace Cake.Common.Tests.Unit.XML
                 fixture.Poke("/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
 
                 // Then
-                fixture.TestIsValue(
+                Assert.True(fixture.TestIsValue(
                     "/configuration/appSettings/add[@key = 'server']/@value",
-                    "productionhost.somecompany.com");
+                    "productionhost.somecompany.com"));
             }
 
             [Fact]
@@ -76,8 +108,24 @@ namespace Cake.Common.Tests.Unit.XML
                 fixture.Poke("/configuration/appSettings/add[@key = 'server']", null);
 
                 // Then
-                fixture.TestIsRemoved(
-                    "/configuration/appSettings/add[@key = 'server']");
+                Assert.True(fixture.TestIsRemoved(
+                    "/configuration/appSettings/add[@key = 'server']"));
+            }
+
+            [Fact]
+            public void Should_Change_Attribute_From_Xml_File_With_Dtd()
+            {
+                // Given
+                var fixture = new XmlPokeFixture(xmlWithDtd:true);
+                fixture.Settings.DtdProcessing = XmlDtdProcessing.Parse;
+
+                // When
+                fixture.Poke("/plist/dict/string", "Cake Version");
+
+                // Then
+                Assert.True(fixture.TestIsValue(
+                    "/plist/dict/string/text()",
+                    "Cake Version"));
             }
         }
     }

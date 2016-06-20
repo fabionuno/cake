@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
@@ -8,7 +11,11 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.SignTool
 {
     /// <summary>
-    /// Contains functionality related to signing assemblies with PFX certificates.
+    /// <para>Contains functionality related to signing assemblies with PFX certificates using <see href="https://msdn.microsoft.com/en-gb/library/windows/desktop/aa387764(v=vs.85).aspx">SignTool</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, SignTool will need to be installed on the machine where
+    /// the Cake script is being executed.  This is typically achieved by installing the correct Windows SDK.
+    /// </para>
     /// </summary>
     [CakeAliasCategoryAttribute("Signing")]
     public static class SignToolSignAliases

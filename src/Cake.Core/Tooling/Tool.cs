@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -26,7 +29,7 @@ namespace Cake.Core.Tooling
         /// <param name="environment">The environment.</param>
         /// <param name="processRunner">The process runner.</param>
         /// <param name="globber">The globber.</param>
-        [Obsolete("Please use Tool(IFileSystem, ICakeEnvironment, IProcessRunner, IToolService) instead.")]
+        [Obsolete("Please use Tool(IFileSystem, ICakeEnvironment, IProcessRunner, IToolLocator) instead.")]
         protected Tool(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IGlobber globber)
             : this(fileSystem, environment, processRunner, (IToolLocator)null)
         {

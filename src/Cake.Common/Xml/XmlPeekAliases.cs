@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.IO;
 using System.Xml;
 using Cake.Core;
@@ -66,20 +69,25 @@ namespace Cake.Common.Xml
             {
                 throw new ArgumentNullException("context");
             }
-            
+
             if (filePath == null)
             {
                 throw new ArgumentNullException("filePath");
             }
-            
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             var file = context.FileSystem.GetFile(filePath);
             if (!file.Exists)
             {
                 throw new FileNotFoundException("Source File not found.", file.Path.FullPath);
             }
-            
+
             using (var fileStream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
-            using (var xmlReader = XmlReader.Create(fileStream))
+            using (var xmlReader = XmlReader.Create(fileStream, GetXmlReaderSettings(settings)))
             {
                 var xmlValue = XmlPeek(xmlReader, xpath, settings);
                 if (xmlValue == null)
@@ -89,7 +97,7 @@ namespace Cake.Common.Xml
                 return xmlValue;
             }
         }
-        
+
         /// <summary>
         /// Gets the value of a target node.
         /// </summary>
@@ -103,30 +111,42 @@ namespace Cake.Common.Xml
             {
                 throw new ArgumentNullException("source");
             }
-            
+
             if (string.IsNullOrWhiteSpace(xpath))
             {
                 throw new ArgumentNullException("xpath");
             }
-            
+
             if (settings == null)
             {
                 throw new ArgumentNullException("settings");
             }
-            
+
             var document = new XmlDocument();
             document.PreserveWhitespace = settings.PreserveWhitespace;
             document.Load(source);
-            
+
             var namespaceManager = new XmlNamespaceManager(document.NameTable);
             foreach (var xmlNamespace in settings.Namespaces)
             {
                 namespaceManager.AddNamespace(xmlNamespace.Key /* Prefix */, xmlNamespace.Value /* URI */);
             }
-            
+
             var node = document.SelectSingleNode(xpath, namespaceManager);
-            
+
             return node != null ? node.Value : null;
+        }
+
+        /// <summary>
+        /// Gets a XmlReaderSettings from a XmlPeekSettings
+        /// </summary>
+        /// <returns>The xml reader settings.</returns>
+        /// <param name="settings">Additional settings to tweak Xml Peek behavior.</param>
+        private static XmlReaderSettings GetXmlReaderSettings(XmlPeekSettings settings)
+        {
+            var xmlReaderSettings = new XmlReaderSettings();
+            xmlReaderSettings.DtdProcessing = (DtdProcessing)settings.DtdProcessing;
+            return xmlReaderSettings;
         }
     }
 }

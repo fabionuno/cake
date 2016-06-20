@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System.Collections.Generic;
 using Cake.Core.IO;
 
 namespace Cake.Common.Tools.DotNetCore.Build
@@ -29,9 +32,9 @@ namespace Cake.Common.Tools.DotNetCore.Build
         public string Configuration { get; set; }
 
         /// <summary>
-        /// Gets or sets specific frameworks to compile.
+        /// Gets or sets the specific framework to compile.
         /// </summary>
-        public ICollection<string> Frameworks { get; set; }
+        public string Framework { get; set; }
 
         /// <summary>
         /// Gets or sets the value that defines what `*` should be replaced with in version field in project.json.

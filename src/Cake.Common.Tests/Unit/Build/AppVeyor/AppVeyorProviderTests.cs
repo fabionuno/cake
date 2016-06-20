@@ -1,4 +1,7 @@
-﻿using Cake.Common.Build.AppVeyor;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using Cake.Common.Build.AppVeyor;
 using Cake.Common.Tests.Fixtures.Build;
 using Cake.Core;
 using Cake.Core.IO;
@@ -196,6 +199,38 @@ namespace Cake.Common.Tests.Unit.Build.AppVeyor
                 fixture.ProcessRunner.Received(1).Start(
                     Arg.Is<FilePath>(p => p.FullPath == "appveyor"),
                     Arg.Is<ProcessSettings>(p => p.Arguments.Render() == "UpdateBuild -Version \"build-123\""));
+            }
+        }
+
+        public sealed class TheUploadTestResultsMethod
+        {
+            [Fact]
+            public void Should_Throw_If_Path_Is_Null()
+            {
+                // Given
+                var fixture = new AppVeyorFixture();
+                var appVeyor = fixture.CreateAppVeyorService();
+
+                // When
+                var result = Record.Exception(() => appVeyor.UploadTestResults(null, AppVeyorTestResultsType.XUnit));
+
+                // Then
+                Assert.IsArgumentNullException(result, "path");
+            }
+
+            [Fact]
+            public void Should_Throw_If_Not_Running_On_AppVeyor()
+            {
+                // Given
+                var fixture = new AppVeyorFixture();
+                var appVeyor = fixture.CreateAppVeyorService();
+
+                // When
+                var result = Record.Exception(() => appVeyor.UploadTestResults("./file.xml", AppVeyorTestResultsType.XUnit));
+
+                // Then
+                Assert.IsExceptionWithMessage<CakeException>(result,
+                    "The current build is not running on AppVeyor.");
             }
         }
     }

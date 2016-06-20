@@ -1,7 +1,11 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Common.Tools.DNU.Build;
 using Cake.Common.Tools.DNU.Pack;
 using Cake.Common.Tools.DNU.Restore;
+using Cake.Common.Tools.DotNetCore;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
@@ -10,6 +14,7 @@ namespace Cake.Common.Tools.DNU
 {
     /// <summary>
     /// Contains functionality for working with the DNU Utility.
+    /// <para>These aliases have been marked as Obsolete.  Use the <see cref="DotNetCoreAliases" /> instead.</para>
     /// </summary>
     [CakeAliasCategory("DNU")]
     public static class DNUAliases

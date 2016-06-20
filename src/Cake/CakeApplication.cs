@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Commands;
 using Cake.Diagnostics;
 
@@ -9,28 +12,20 @@ namespace Cake
     /// </summary>
     internal sealed class CakeApplication
     {
-        private readonly IVerbosityAwareLog _log;
         private readonly ICommandFactory _commandFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CakeApplication"/> class.
         /// </summary>
-        /// <param name="log">The log.</param>
         /// <param name="commandFactory">The command factory.</param>
         public CakeApplication(
-            IVerbosityAwareLog log,
             ICommandFactory commandFactory)
         {
-            if (log == null)
-            {
-                throw new ArgumentNullException("log");
-            }
             if (commandFactory == null)
             {
                 throw new ArgumentNullException("commandFactory");
             }
 
-            _log = log;
             _commandFactory = commandFactory;
         }
 
@@ -45,9 +40,6 @@ namespace Cake
             {
                 throw new ArgumentNullException("options");
             }
-
-            // Set verbosity.
-            _log.SetVerbosity(options.Verbosity);
 
             // Create the correct command and execute it.
             var command = CreateCommand(options);

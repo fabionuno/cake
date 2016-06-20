@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using Cake.Core;
 using Cake.Core.Annotations;
@@ -7,9 +10,10 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.ILMerge
 {
     /// <summary>
-    /// <para>Contains functionality related to ILMerge.</para>
+    /// <para>Contains functionality related to <see href="http://research.microsoft.com/en-us/people/mbarnett/ILMerge.aspx">ILMerge</see>.</para>
     /// <para>
-    /// In order to use the commands for this alias, include the following in your build.cake file to download and install from NuGet.org, or specify the ToolPath within the ILMergeSettings class:
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the <see cref="ILMergeSettings" /> class:
     /// <code>
     /// #tool "nuget:?package=ilmerge"
     /// </code>

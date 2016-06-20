@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -14,8 +17,8 @@ namespace Cake.Common.Solution.Project.Properties
     /// </summary>
     public sealed class AssemblyInfoParser
     {
-        private const string NonQuotedPattern = @"^\s*\[assembly: {0}\((?<attributeValue>.*)\)";
-        private const string QuotedPattern = @"^\s*\[assembly: {0}\(""(?<attributeValue>.*)""\)";
+        private const string NonQuotedPattern = @"^\s*\[assembly: {0} ?\((?<attributeValue>.*)\)";
+        private const string QuotedPattern = @"^\s*\[assembly: {0} ?\(""(?<attributeValue>.*)""\)";
         private const string DefaultVersion = "1.0.0.0";
 
         private readonly IFileSystem _fileSystem;

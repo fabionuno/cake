@@ -1,4 +1,7 @@
-﻿using Autofac;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using Autofac;
 using Cake.Arguments;
 using Cake.Commands;
 using Cake.Core;
@@ -60,7 +63,7 @@ namespace Cake.Autofac
             builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
             builder.RegisterType<CakeApplication>().SingleInstance();
             builder.RegisterType<ScriptRunner>().As<IScriptRunner>().SingleInstance();
-            builder.RegisterType<CakeBuildLog>().As<ICakeLog>().As<IVerbosityAwareLog>().SingleInstance();
+            builder.RegisterType<CakeBuildLog>().As<ICakeLog>().SingleInstance();
             builder.RegisterType<VerbosityParser>().SingleInstance();
             builder.RegisterType<CakeDebugger>().As<IDebugger>().SingleInstance();
 

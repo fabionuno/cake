@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
@@ -9,7 +12,14 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.NUnit
 {
     /// <summary>
-    /// Contains functionality related to running NUnit v2 and v3 unit tests.
+    /// <para>Contains functionality related to running <see href="https://github.com/nunit/nunit">NUnit</see> v2 and v3 unit tests.</para>
+    /// <para>
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the <see cref="NUnit3Settings" /> class:
+    /// <code>
+    /// #tool "nuget:?package=NUnit.ConsoleRunner"
+    /// </code>
+    /// </para>
     /// </summary>
     [CakeAliasCategory("NUnit v3")]
     public static class NUnit3Aliases

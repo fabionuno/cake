@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -62,18 +65,24 @@ namespace Cake.Common.Tools.DotNetCore.Restore
                 builder.AppendQuoted(settings.PackagesDirectory.MakeAbsolute(_environment).FullPath);
             }
 
-            // Source
-            if (!string.IsNullOrEmpty(settings.Source))
+            // Sources
+            if (settings.Sources != null)
             {
-                builder.Append("--source");
-                builder.Append(settings.Source);
+                foreach (var source in settings.Sources)
+                {
+                    builder.Append("--source");
+                    builder.AppendQuoted(source);
+                }
             }
 
             // List of fallback package sources
-            if (settings.FallbackSources != null && settings.FallbackSources.Count > 0)
+            if (settings.FallbackSources != null)
             {
-                builder.Append("--fallbacksource");
-                builder.AppendQuoted(string.Join(";", settings.FallbackSources));
+                foreach (var source in settings.FallbackSources)
+                {
+                    builder.Append("--fallbacksource");
+                    builder.AppendQuoted(source);
+                }
             }
 
             // Config file
@@ -84,10 +93,13 @@ namespace Cake.Common.Tools.DotNetCore.Restore
             }
 
             // List of runtime identifiers
-            if (settings.InferRuntimes != null && settings.InferRuntimes.Count > 0)
+            if (settings.InferRuntimes != null)
             {
-                builder.Append("--infer-runtimes");
-                builder.AppendQuoted(string.Join(";", settings.InferRuntimes));
+                foreach (var runtime in settings.InferRuntimes)
+                {
+                    builder.Append("--infer-runtimes");
+                    builder.AppendQuoted(runtime);
+                }
             }
 
             // Quiet

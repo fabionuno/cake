@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Common.Tools.DotCover.Analyse;
 using Cake.Common.Tools.DotCover.Cover;
 using Cake.Core;
@@ -8,7 +11,14 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.DotCover
 {
     /// <summary>
-    /// Contains functionality related to DotCover.
+    /// <para>Contains functionality related to <see href="https://www.jetbrains.com/dotcover/">DotCover</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, include the following in your build.cake file to download and
+    /// install from NuGet.org, or specify the ToolPath within the appropriate settings class:
+    /// <code>
+    /// #tool "nuget:?package=JetBrains.dotCover.CommandLineTools"
+    /// </code>
+    /// </para>
     /// </summary>
     [CakeAliasCategory("DotCover")]
     public static class DotCoverAliases

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
@@ -9,7 +12,12 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.MSTest
 {
     /// <summary>
-    /// Contains functionality related to running MSTest unit tests.
+    /// <para>Contains functionality related to running <see href="https://msdn.microsoft.com/en-us/library/ms182486.aspx">MSTest</see> unit tests.</para>
+    /// <para>
+    /// In order to use the commands for this alias, MSTest will need to be installed on the machine where
+    /// the Cake script is being executed.  This is typically achieved by having either Visual Studio installed, or by
+    /// using the Micrsoft Build Tools, for example, for <see href="https://www.microsoft.com/en-us/download/details.aspx?id=48159">2015</see>.
+    /// </para>
     /// </summary>
     [CakeAliasCategory("MSTest")]
     public static class MSTestAliases

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+using System;
 using Cake.Common.Tools.DotNetCore.Build;
 using Cake.Common.Tools.DotNetCore.Execute;
 using Cake.Common.Tools.DotNetCore.Pack;
@@ -13,7 +16,12 @@ using Cake.Core.IO;
 namespace Cake.Common.Tools.DotNetCore
 {
     /// <summary>
-    /// Contains functionality for working with the .NET Core CLI.
+    /// <para>Contains functionality related to <see href="https://github.com/dotnet/cli">.NET Core CLI</see>.</para>
+    /// <para>
+    /// In order to use the commands for this alias, the .Net Core CLI tools will need to be installed on the machine where
+    /// the Cake script is being executed.  See this <see href="https://www.microsoft.com/net/core">page</see> for information
+    /// on how to install.
+    /// </para>
     /// </summary>
     [CakeAliasCategory("DotNetCore")]
     public static class DotNetCoreAliases
@@ -50,7 +58,7 @@ namespace Cake.Common.Tools.DotNetCore
         [CakeMethodAlias]
         [CakeAliasCategory("Execute")]
         [CakeNamespaceImport("Cake.Common.Tools.DotNetCore.Execute")]
-        public static void DotNetCoreExecute(this ICakeContext context, FilePath assemblyPath, string arguments)
+        public static void DotNetCoreExecute(this ICakeContext context, FilePath assemblyPath, ProcessArgumentBuilder arguments)
         {
             context.DotNetCoreExecute(assemblyPath, arguments, null);
         }
@@ -75,7 +83,7 @@ namespace Cake.Common.Tools.DotNetCore
         [CakeMethodAlias]
         [CakeAliasCategory("Execute")]
         [CakeNamespaceImport("Cake.Common.Tools.DotNetCore.Execute")]
-        public static void DotNetCoreExecute(this ICakeContext context, FilePath assemblyPath, string arguments, DotNetCoreSettings settings)
+        public static void DotNetCoreExecute(this ICakeContext context, FilePath assemblyPath, ProcessArgumentBuilder arguments, DotNetCoreSettings settings)
         {
             if (context == null)
             {
@@ -358,7 +366,7 @@ namespace Cake.Common.Tools.DotNetCore
         [CakeMethodAlias]
         [CakeAliasCategory("Run")]
         [CakeNamespaceImport("Cake.Common.Tools.DotNetCore.Run")]
-        public static void DotNetCoreRun(this ICakeContext context, string project, string arguments)
+        public static void DotNetCoreRun(this ICakeContext context, string project, ProcessArgumentBuilder arguments)
         {
             context.DotNetCoreRun(project, arguments, null);
         }
@@ -384,7 +392,7 @@ namespace Cake.Common.Tools.DotNetCore
         [CakeMethodAlias]
         [CakeAliasCategory("Run")]
         [CakeNamespaceImport("Cake.Common.Tools.DotNetCore.Run")]
-        public static void DotNetCoreRun(this ICakeContext context, string project, string arguments, DotNetCoreRunSettings settings)
+        public static void DotNetCoreRun(this ICakeContext context, string project, ProcessArgumentBuilder arguments, DotNetCoreRunSettings settings)
         {
             if (context == null)
             {
@@ -469,7 +477,7 @@ namespace Cake.Common.Tools.DotNetCore
         [CakeNamespaceImport("Cake.Common.Tools.DotNetCore.Test")]
         public static void DotNetCoreTest(this ICakeContext context)
         {
-            context.DotNetCoreRun(null, null);
+            context.DotNetCoreTest(null, null);
         }
 
         /// <summary>

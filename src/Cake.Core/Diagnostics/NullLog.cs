@@ -1,4 +1,7 @@
-﻿namespace Cake.Core.Diagnostics
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+namespace Cake.Core.Diagnostics
 {
     /// <summary>
     /// A log that discards messages written to it.
@@ -6,12 +9,13 @@
     public sealed class NullLog : ICakeLog
     {
         /// <summary>
-        /// Gets the verbosity.
+        /// Gets or sets the verbosity.
         /// </summary>
         /// <value>The verbosity.</value>
         public Verbosity Verbosity
         {
             get { return Verbosity.Quiet; }
+            set { }
         }
 
         /// <summary>
